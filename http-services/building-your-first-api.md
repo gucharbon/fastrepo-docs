@@ -140,5 +140,11 @@ poetry add --dev uvicorn --extras watchgodreload
 
 Now that your application is started, you should 
 
+## Make your first commit
+
+When you perform a commit, several tests must pass in order for the commit to be accepted:
+
+![](../.gitbook/assets/image%20%284%29.png)
+
 
 
