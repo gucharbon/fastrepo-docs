@@ -138,7 +138,17 @@ poetry add --dev uvicorn --extras watchgodreload
 ```
 {% endhint %}
 
-Now that your application is started, you should 
+Now that your application is started, you should
+
+## Visit the Swagger UI
+
+The Open API documentation should be served on your localhost on [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+You should see this page:
+
+![](../.gitbook/assets/image%20%285%29.png)
+
+
 
 ## Make your first commit
 
