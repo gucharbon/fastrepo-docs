@@ -8,8 +8,6 @@ description: Build a REST API using Python
 
 {% page-ref page="using-s3-storage.md" %}
 
-{% page-ref page="http-services-introduction.md" %}
-
 {% hint style="success" %}
 FastAPI docmentation is extensive and cover a lot more of aspects that this guide. Refer to the documentation any time you feel its needed.
 {% endhint %}
@@ -17,4 +15,6 @@ FastAPI docmentation is extensive and cover a lot more of aspects that this guid
 {% hint style="info" %}
 Work in progres... Check the [roadmap](../roadmap.md).
 {% endhint %}
+
+
 
