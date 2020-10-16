@@ -21,7 +21,7 @@ Work in progres... Check the [roadmap](../roadmap.md).
 Use `poetry` to add dependencies:
 
 ```text
-poetry add fastapi
+poetry add fastapi uvicorn
 ```
 
 ## Create your application
@@ -76,9 +76,35 @@ app.include_router(my_custom_router)
 ```
 {% endcode %}
 
-## Write some routes
+## Write a basic route
 
 Let's write a route that will accept `GET` requests on the `/demo` endpoint and return an empty JSON body with status `HTTP 202 Accepted` :
+
+{% api-method method="get" host="/" path="demo" %}
+{% api-method-summary %}
+Get an empty response
+{% endapi-method-summary %}
+
+{% api-method-description %}
+Return an empty response when successful. This route does not accept any parameter.
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=202 %}
+{% api-method-response-example-description %}
+Empty response.
+{% endapi-method-response-example-description %}
+
+```
+
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
 
 {% code title="src/demo\_fastapi/routes.py" %}
 ```python
@@ -91,36 +117,28 @@ router = APIRouter()
 
 @router.get("/demo", summary="Get an empty response.")
 def demo_response():
-    """Return an empty response when successful."""
+    """Return an empty response when successful. This route does not accept any parameter."""
     return Response(status_code=202)
 ```
 {% endcode %}
 
-Your route can be documented as below:
+## Start your application
 
-{% api-method method="get" host="/" path="demo" %}
-{% api-method-summary %}
-Demo Response. Get an empty response
-{% endapi-method-summary %}
+Now that there is a valid route, let's start the application:
 
-{% api-method-description %}
-Return an empty response when successful.
-{% endapi-method-description %}
-
-{% api-method-spec %}
-{% api-method-request %}
-
-{% api-method-response %}
-{% api-method-response-example httpCode=202 %}
-{% api-method-response-example-description %}
-Empty response
-{% endapi-method-response-example-description %}
-
+```python
+uvicorn demo_fastapi.app:app --reload
 ```
 
+{% hint style="info" %}
+By default Uvicorn uses simple changes detection strategy that compares python files modification times few times a second. If this approach doesn't work for your project \(eg. because of its complexity\), you can install Uvicorn with optional `watchgod` dependency to use filesystem events instead:
+
+```text
+poetry add --dev uvicorn --extras watchgodreload
 ```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+{% endhint %}
+
+Now that your application is started, you should 
+
+
 
