@@ -123,7 +123,23 @@ If you're not in a hurry, check the details tab to learn more.
 {% endtab %}
 
 {% tab title="Details" %}
+According to [FastAPI documentation](https://fastapi.tiangolo.com/tutorial/bigger-applications/#path-operations-with-apirouter):
 
+> You can think of `APIRouter` as a "mini `FastAPI`" class.
+>
+> All the same options are supported.
+>
+> All the same parameters, responses, dependencies, tags, etc.
+
+This is the **easiest way to better understand how to use routers**, but this **does not represent what happens under the hood**.
+
+If you look at the FastAPI class definition, you will find that [an instance creates a router in its `__init__` method](https://github.com/tiangolo/fastapi/blob/master/fastapi/applications.py#L60).
+
+And if you look into the definition of the `add_route` method that is used to create new endpoints, you will find that [all it does is calling the `add_route` method of the router](https://github.com/tiangolo/fastapi/blob/master/fastapi/applications.py#L183). The same goes for every method that let user manage endpoints, [event the `include_router` method](https://github.com/tiangolo/fastapi/blob/master/fastapi/applications.py#L300).
+
+This means that not only all same options are supported, but most of the times, the FastAPI class simply class forward method calls to its router.
+
+It is now clear why a router can have its own lifecycle events, its own endpoints and its own middlewares just as a FastAPI application, this is because the FastAPI application is also built upon a single default router.
 {% endtab %}
 {% endtabs %}
 
