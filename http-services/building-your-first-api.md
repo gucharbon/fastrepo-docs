@@ -183,7 +183,7 @@ In practice, **events hooks** provide a simple way to **connect clients before t
 
 ### Write a basic route
 
-Let's write a route that will accept `GET` requests on the `/demo` endpoint and return an empty JSON body with status `HTTP 202 Accepted` 
+Let's write a route that will accept `GET` requests on the root \(`/`\) endpoint and return an empty JSON body with status `HTTP 202 Accepted` 
 
 {% code title="src/demo\_fastapi/routes.py" %}
 ```python
@@ -213,7 +213,12 @@ async def on_shutdown() -> None:
     logger.debug("Stopping router!")
 
 
-@router.get("/", summary="Get an empty response.", status_code=202, tags=["Demonstration"])
+@router.get(
+    "/",
+    summary="Get an empty response.",
+    status_code=202,
+    tags=["Demonstration"],
+)
 def demo_response() -> Response:
     """Return an empty response when successful. This route does not accept any parameter."""
     return Response(status_code=202)
