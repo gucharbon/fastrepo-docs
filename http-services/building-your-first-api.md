@@ -56,6 +56,7 @@ app = FastAPI(
     title="Demo FastAPI",
     description="A simple Rest API written built using FastAPI."
 )
+
 ```
 {% endcode %}
 
@@ -108,6 +109,7 @@ from fastapi import APIRouter
 
 
 router = APIRouter()
+
 ```
 {% endcode %}
 
@@ -151,6 +153,7 @@ Each router can have its own lifecycle hooks, I.E, `startup` and `shutdown` hook
 ```python
 """HTTP routes for the demo REST API."""
 from fastapi import APIRouter
+from loguru import logger
 
 
 router = APIRouter()
@@ -172,6 +175,7 @@ async def on_shutdown():
     If any error is raised in this function, application will exit immediately.
     """
     logger.debug("Stopping router!")
+
 ```
 {% endcode %}
 
@@ -185,15 +189,34 @@ Let's write a route that will accept `GET` requests on the `/demo` endpoint and 
 ```python
 """HTTP routes for the demo REST API."""
 from fastapi import APIRouter, Response
+from loguru import logger
 
 
 router = APIRouter()
 
 
+@router.on_event("startup")
+async def on_startup():
+    """"This function is called once after application initialization.
+    
+    If any error is raised in this function, the application will never start.
+    """
+    logger.debug("Starting router!")
+
+
+@router.on_event("shutdown")
+async def on_shutdown():
+    """This function is called once before application is stopped.
+    
+    If any error is raised in this function, application will exit immediately.
+    """
+    logger.debug("Stopping router!")
+
 @router.get("/demo", summary="Get an empty response.", status_code=202)
 def demo_response():
     """Return an empty response when successful. This route does not accept any parameter."""
     return Response(status_code=202)
+
 ```
 {% endcode %}
 
@@ -215,6 +238,7 @@ app = FastAPI(
 )
 
 app.include_router(my_custom_router)
+
 ```
 {% endcode %}
 
