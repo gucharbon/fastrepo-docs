@@ -118,7 +118,7 @@ router = APIRouter()
 {% hint style="info" %}
 A `FastAPI` application **always includes a default router**. If you follow the [Beginner Tutorial](https://fastapi.tiangolo.com/tutorial/first-steps/) you will see that there isn't any mention of `APIRouter`. It is only mentionned in the [Bigger Applications - Multiple file section](https://fastapi.tiangolo.com/tutorial/bigger-applications/). This means that **creating a router is optionnal**, but **it should still be used for better separation of concern**.
 
-If you're not in a hurry, check the details tab to learn more.
+If you're not in a hurry, continue reading this tutorial and come back later to check the details tab to learn more. 
 {% endhint %}
 {% endtab %}
 
@@ -137,7 +137,7 @@ If you look at the FastAPI class definition, you will find that [an instance cre
 
 And if you look into the definition of the `add_route` method that is used to create new endpoints, you will find that [all it does is calling the `add_route` method of the router](https://github.com/tiangolo/fastapi/blob/master/fastapi/applications.py#L183). The same goes for every method that let user manage endpoints, [event the `include_router` method](https://github.com/tiangolo/fastapi/blob/master/fastapi/applications.py#L300).
 
-This means that not only all same options are supported, but most of the times, the FastAPI class simply class forward method calls to its router.
+This means that not only all same options are supported, but most of the times, the FastAPI class simply forwards method calls to its router.
 
 It is now clear why a router can have its own lifecycle events, its own endpoints and its own middlewares just as a FastAPI application, this is because the FastAPI application is also built upon a single default router.
 {% endtab %}
@@ -145,7 +145,7 @@ It is now clear why a router can have its own lifecycle events, its own endpoint
 
 ### Define router lifecycle events
 
-Each router can have its own lifecycle, I.E, `startup` and `shutdown` events:
+Each router can have its own lifecycle hooks, I.E, `startup` and `shutdown` hooks:
 
 {% code title="src/demo\_fastapi/routes.py" %}
 ```python
@@ -175,9 +175,9 @@ async def on_shutdown():
 ```
 {% endcode %}
 
-In practice, **events hooks** provide a simple way to **connect clients before the application starts** and **close connections on shutdown** in order to gracefully stop the application.
+In practice, **events hooks** provide a simple way to **connect clients before the application starts** and **close connections on shutdown** in order to gracefully stop the application. You will find such an example in the page [Using PostgreSQL Database](using-postgresql-database.md).
 
-### Integrate router within application
+### Integrate the router within your application
 
 Now that there is a router, let's include it into the application:
 
