@@ -200,5 +200,5 @@ You should see the test coverage report displayed on the console:
 
 ![pytest output in the console](../.gitbook/assets/image%20%2812%29.png)
 
-And here we go, 🎉🎉 100% test coverage 🎉🎉
+And here we go, 🎉🎉 100% test coverage 🎉🎉.
 
