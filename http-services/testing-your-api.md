@@ -140,7 +140,7 @@ def test_startup_event(application: FastAPI, caplog: LogCaptureFixture) -> None:
 {% endcode %}
 
 {% hint style="info" %}
-The `test_startup_event` declares an argument named `application`. Because **we defined a fixture named applicatio**n in `tests/conftest.py`, **the returned value of the fixture will automatically be injected as the argument value** when running the test.
+The `test_startup_event` declares an argument named `application`. Because **we defined a fixture** named application in `tests/conftest.py`, the **returned value of the fixture** will **automatically be injected** as the **argument value** of the function when running the test.
 {% endhint %}
 
 ## Testing the route
