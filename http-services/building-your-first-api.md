@@ -212,6 +212,7 @@ async def on_shutdown():
     """
     logger.debug("Stopping router!")
 
+
 @router.get("/demo", summary="Get an empty response.", status_code=202)
 def demo_response():
     """Return an empty response when successful. This route does not accept any parameter."""
