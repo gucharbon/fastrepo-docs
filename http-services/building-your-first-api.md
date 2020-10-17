@@ -4,46 +4,92 @@ description: Create an HTTP service in minutes
 
 # Building your first API
 
-## Create the project
+## The foundations
 
-First of all you need to create a new project using `fastrepo`:
+In this section you will learn how to:
+
+* Create a `FastAPI` application
+* Create an `APIRouter`
+* Define a route using the `APIRouter`
+* Start your application using `uvicorn`
+
+### Create the project
+
+Let's create a new project using `fastrepo`:
 
 ```
 python -m fastrepo --project-name "Demo FastAPI"
 ```
 
 {% hint style="info" %}
-Work in progres... Check the [roadmap](../roadmap.md).
+If you don't have `fastrepo` installed, read the[ F.A.Q](../#how-to-install-fastrepo).
 {% endhint %}
 
-## Add `fastapi` dependency
+### Install dependencies
 
-Use `poetry` to add dependencies:
+Use `poetry` to add two dependencies:
+
+* fastapi
+* uvicorn
 
 ```text
 poetry add fastapi uvicorn
 ```
 
-## Create your application
+### Create your application
 
-Create a file `src/demo_fastapi/app.py`.
+Create a file named `app.py` into the python package directory. This file will define your application:
 
 {% code title="src/demo\_fastapi/app.py" %}
 ```python
-"""Rest API built using python and fastapi."""
+"""Demo FastAPI is a simple REST API built using FastAPI."""
 from fastapi import FastAPI
 
 
 app = FastAPI(
     title="Demo FastAPI",
-    description="A demonstration Rest API written using fastapi."
+    description="A simple Rest API written built using FastAPI."
 )
 ```
 {% endcode %}
 
-## Create a router for your application
+### Start your application
 
-Create a file `src/demo_fastapi/routes.py`.
+You can already start your application using the command:
+
+```python
+uvicorn demo_fastapi.app:app --reload
+```
+
+{% hint style="info" %}
+By default, `uvicorn` starts your application using port `8000` and listens to `localhost`. You can change those settings using the `--port` and `--host` option respectively.
+{% endhint %}
+
+You should see logs in your console indicating that your application is starting:
+
+![Uvicorn running and serving FastAPI application](../.gitbook/assets/image%20%287%29.png)
+
+{% hint style="success" %}
+Python displays debugging information related to asyncio such as this line:
+
+```text
+Executing <Task pending name='Task-1' coro=<Server.serve() running at c:\users\gcharbon\workspace\books\demo_fastapi\.venv\lib\site-packages\uvicorn\main.py:424> wait_for=<Future pending cb=[<TaskWakeupMethWrapper object at 0x000001A0CBBAFB80>()] created at C:\Users\gcharbon\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py:422> cb=[_run_until_complete_cb() at C:\Users\gcharbon\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py:184] created at C:\Users\gcharbon\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py:595> took 0.375 seconds
+```
+
+when the environment variable `"PYTHONASYNCIODEBUG"` is set to `1`. You should always set this environment variable when developing.
+
+Check the [official documentation](https://docs.python.org/3.8/library/asyncio-dev.html) to learn more about asyncio debug mode.
+{% endhint %}
+
+If you access `http://localhost:8000/docs` you should see this page:
+
+![Default Swagger OpenAPI Documentation](../.gitbook/assets/image%20%286%29.png)
+
+An operation is 
+
+### Create a router for your application
+
+Create a file `src/demo_fastapi/routes.py`. This file will define your application routes.
 
 {% code title="src/demo\_fastapi/routes.py" %}
 ```python
@@ -55,9 +101,9 @@ router = APIRouter()
 ```
 {% endcode %}
 
-## Integrate router within application
+### Integrate router within application
 
-Let's include the router into the application:
+Now that there is a router, let's include it into the application:
 
 {% code title="src/demo\_fastapi/app.py" %}
 ```python
@@ -76,35 +122,9 @@ app.include_router(my_custom_router)
 ```
 {% endcode %}
 
-## Write a basic route
+### Write a basic route
 
-Let's write a route that will accept `GET` requests on the `/demo` endpoint and return an empty JSON body with status `HTTP 202 Accepted` :
-
-{% api-method method="get" host="/" path="demo" %}
-{% api-method-summary %}
-Get an empty response
-{% endapi-method-summary %}
-
-{% api-method-description %}
-Return an empty response when successful. This route does not accept any parameter.
-{% endapi-method-description %}
-
-{% api-method-spec %}
-{% api-method-request %}
-
-{% api-method-response %}
-{% api-method-response-example httpCode=202 %}
-{% api-method-response-example-description %}
-Empty response.
-{% endapi-method-response-example-description %}
-
-```
-
-```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
+Let's write a route that will accept `GET` requests on the `/demo` endpoint and return an empty JSON body with status `HTTP 202 Accepted` 
 
 {% code title="src/demo\_fastapi/routes.py" %}
 ```python
@@ -122,39 +142,23 @@ def demo_response():
 ```
 {% endcode %}
 
-## Start your application
-
-Now that there is a valid route, let's start the application:
-
-```python
-uvicorn demo_fastapi.app:app --reload
-```
-
-{% hint style="info" %}
-By default Uvicorn uses simple changes detection strategy that compares python files modification times few times a second. If this approach doesn't work for your project \(eg. because of its complexity\), you can install Uvicorn with optional `watchgod` dependency to use filesystem events instead:
-
-```text
-poetry add --dev uvicorn --extras watchgodreload
-```
-{% endhint %}
-
-Now that your application is started, you should
-
-## Visit the Swagger UI
+### Visit the Swagger UI
 
 The Open API documentation should be served on your localhost on [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 
 You should see this page:
 
-![](../.gitbook/assets/image%20%285%29.png)
+![Swagger OpenAPI Documentation](../.gitbook/assets/image%20%285%29.png)
 
 
 
-## Make your first commit
+### Make your first commit
 
 When you perform a commit, several tests must pass in order for the commit to be accepted:
 
-![](../.gitbook/assets/image%20%284%29.png)
+![Console after successfull commit](../.gitbook/assets/image%20%284%29.png)
+
+
 
 
 
