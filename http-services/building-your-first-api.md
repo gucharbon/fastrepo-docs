@@ -177,6 +177,26 @@ async def on_shutdown():
 
 In practice, **events hooks** provide a simple way to **connect clients before the application starts** and **close connections on shutdown** in order to gracefully stop the application. You will find such an example in the page [Using PostgreSQL Database](using-postgresql-database.md).
 
+### Write a basic route
+
+Let's write a route that will accept `GET` requests on the `/demo` endpoint and return an empty JSON body with status `HTTP 202 Accepted` 
+
+{% code title="src/demo\_fastapi/routes.py" %}
+```python
+"""HTTP routes for the demo REST API."""
+from fastapi import APIRouter, Response
+
+
+router = APIRouter()
+
+
+@router.get("/demo", summary="Get an empty response.", status_code=202)
+def demo_response():
+    """Return an empty response when successful. This route does not accept any parameter."""
+    return Response(status_code=202)
+```
+{% endcode %}
+
 ### Integrate the router within your application
 
 Now that there is a router, let's include it into the application:
@@ -198,43 +218,27 @@ app.include_router(my_custom_router)
 ```
 {% endcode %}
 
-### Write a basic route
-
-Let's write a route that will accept `GET` requests on the `/demo` endpoint and return an empty JSON body with status `HTTP 202 Accepted` 
-
-{% code title="src/demo\_fastapi/routes.py" %}
-```python
-"""HTTP routes for the demo REST API."""
-from fastapi import APIRouter, Response
-
-
-router = APIRouter()
-
-
-@router.get("/demo", summary="Get an empty response.")
-def demo_response():
-    """Return an empty response when successful. This route does not accept any parameter."""
-    return Response(status_code=202)
-```
-{% endcode %}
-
 ### Visit the Swagger UI
 
-The Open API documentation should be served on your localhost on [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+Refresh the documentation served on [`http://127.0.0.1:8000/docs`](http://127.0.0.1:8000/docs)\`\`
 
 You should see this page:
 
 ![Swagger OpenAPI Documentation](../.gitbook/assets/image%20%285%29.png)
 
-
+Click on "Try it out" and make a request to your API using the form. It should send you back an empty response with status code 202 as mentioned in the documentation.
 
 ### Make your first commit
 
-When you perform a commit, several tests must pass in order for the commit to be accepted:
+It's time to make your first commit. When you perform a commit, several tests must pass in order for the commit to be accepted:
 
 ![Console after successfull commit](../.gitbook/assets/image%20%284%29.png)
 
+{% hint style="info" %}
+Those tests are called [`git hooks`](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) and are managed using [`pre-commit`](https://pre-commit.com/). The configuration of pre-commit can be found in the`.pre-commit-config.yml file.`
+{% endhint %}
 
+\`\`
 
 
 
