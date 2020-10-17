@@ -238,7 +238,7 @@ It's time to make your first commit. When you perform a commit, several tests mu
 Those tests are called [`git hooks`](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) and are managed using [`pre-commit`](https://pre-commit.com/). The configuration of pre-commit can be found in the`.pre-commit-config.yml file.`
 {% endhint %}
 
-\`\`
+Before writing more complex routes, let's write a test for our minimal application.
 
 
 
