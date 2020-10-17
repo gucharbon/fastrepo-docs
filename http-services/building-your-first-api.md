@@ -78,7 +78,7 @@ By default, `uvicorn` starts your application using port `8000` and listens to `
 
 You should see logs in your console indicating that your application is starting:
 
-![Uvicorn running and serving FastAPI application](../.gitbook/assets/image%20%287%29.png)
+![Uvicorn running and serving FastAPI application](../.gitbook/assets/image%20%289%29.png)
 
 {% hint style="success" %}
 Python displays debugging information related to asyncio such as this line:
@@ -94,7 +94,7 @@ Check the [official documentation](https://docs.python.org/3.8/library/asyncio-d
 
 If you access [`http://localhost:8000/docs`](http://localhost:8000/docs) you should see this page:
 
-![Default Swagger OpenAPI Documentation](../.gitbook/assets/image%20%286%29.png)
+![](../.gitbook/assets/image%20%2811%29.png)
 
 Now that the application is created, let's implement some routes.
 
@@ -196,7 +196,7 @@ router = APIRouter()
 
 
 @router.on_event("startup")
-async def on_startup():
+async def on_startup() -> None:
     """"This function is called once after application initialization.
     
     If any error is raised in this function, the application will never start.
@@ -205,7 +205,7 @@ async def on_startup():
 
 
 @router.on_event("shutdown")
-async def on_shutdown():
+async def on_shutdown() -> None:
     """This function is called once before application is stopped.
     
     If any error is raised in this function, application will exit immediately.
@@ -213,17 +213,35 @@ async def on_shutdown():
     logger.debug("Stopping router!")
 
 
-@router.get("/demo", summary="Get an empty response.", status_code=202)
-def demo_response():
+@router.get("/", summary="Get an empty response.", status_code=202, tags=["Demonstration"])
+def demo_response() -> Response:
     """Return an empty response when successful. This route does not accept any parameter."""
     return Response(status_code=202)
 
 ```
 {% endcode %}
 
-### Integrate the router within your application
+{% hint style="info" %}
+As you can see, we annotate function return type. You must always provide type annotation for arguments accepted by your function as well as its return value.
+{% endhint %}
 
-Now that there is a router, let's include it into the application:
+A route that accept `GET` requests is defined using the decorator `@router.get()`. If you need to create a route that accept `POST` requests, you would define it using the `@router.post()` decorator.
+
+This decorator accept one mandatory positional argument:
+
+* `path:` A string representing the last part of the URL starting from the router root URL.
+
+It also accepts several optional arguments that will be described in detail later. Let's focus on the three we're using now
+
+* `status_code`: The status code to return with the response. Default to 200.
+* `summary`: The route summary that is displayed in the OpenAPI documentation.
+* `tags`: Tags will be added to the OpenAPI schema and used by the automatic documentation interfaces.
+
+We cannot test this route yet, as we did not include the router in the application.
+
+### Integrate the router with the application
+
+Now that the router has a route defined \(it would still work without defining route that being said\), let's include it into the application:
 
 {% code title="src/demo\_fastapi/app.py" %}
 ```python
@@ -249,15 +267,17 @@ Refresh the documentation served on [`http://127.0.0.1:8000/docs`](http://127.0.
 
 You should see this page:
 
-![Swagger OpenAPI Documentation](../.gitbook/assets/image%20%285%29.png)
+![](../.gitbook/assets/image%20%288%29.png)
 
-Click on "Try it out" and make a request to your API using the form. It should send you back an empty response with status code 202 as mentioned in the documentation.
+Click on "Try it out" and make a request to your API using the form. It should send you back an empty response with status code 202 as mentioned in the documentation:
+
+![](../.gitbook/assets/image%20%2810%29.png)
 
 ### Make your first commit
 
 It's time to make your first commit. When you perform a commit, several tests must pass in order for the commit to be accepted:
 
-![Console after successfull commit](../.gitbook/assets/image%20%284%29.png)
+![Console after successfull commit](../.gitbook/assets/image%20%2812%29.png)
 
 {% hint style="info" %}
 Those tests are called [`git hooks`](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) and are managed using [`pre-commit`](https://pre-commit.com/). The configuration of pre-commit can be found in the`.pre-commit-config.yml file.`
