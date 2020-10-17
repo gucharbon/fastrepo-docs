@@ -55,6 +55,9 @@ def caplog(
     - caplog.records         -> list of logging.LogRecord instances
     - caplog.record_tuples   -> list of (logger_name, level, message) tuples
     - caplog.clear()         -> clear captured records and formatted log output string
+
+    The code is taken from loguru documentation. Type annotations were added to play nice with mypy.
+    See https://loguru.readthedocs.io/en/stable/resources/migration.html#making-things-work-with-pytest-and-caplog
     """
 
     class PropogateHandler(logging.Handler):
@@ -96,6 +99,14 @@ async def client(application: FastAPI) -> AsyncGenerator[AsyncClient, None]:
 
 ```
 {% endcode %}
+
+{% hint style="info" %}
+As stated in comment, the `caplog` fixture is taken from [loguru documentation](https://loguru.readthedocs.io/en/stable/resources/migration.html#making-things-work-with-pytest-and-caplog).
+{% endhint %}
+
+{% hint style="warning" %}
+Don't forget to add `@pytest.mark.asyncio` to any async fixture or test else `pytest` will fail.
+{% endhint %}
 
 Those fixtures can now be used anywhere in your tests, without importing them.
 
