@@ -187,7 +187,11 @@ Let's write a route that will accept `GET` requests on the root \(`/`\) endpoint
 
 {% code title="src/demo\_fastapi/routes.py" %}
 ```python
+from fastapi import APIRouter, Response
+from loguru import logger
+
 ...
+
 
 @router.get(
     "/",
