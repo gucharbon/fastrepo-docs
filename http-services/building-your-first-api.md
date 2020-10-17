@@ -78,7 +78,7 @@ By default, `uvicorn` starts your application using port `8000` and listens to `
 
 You should see logs in your console indicating that your application is starting:
 
-![Uvicorn running and serving FastAPI application](../.gitbook/assets/image%20%289%29.png)
+![Uvicorn running and serving FastAPI application](../.gitbook/assets/image%20%2810%29.png)
 
 {% hint style="success" %}
 Python displays debugging information related to asyncio such as this line:
@@ -94,7 +94,7 @@ Check the [official documentation](https://docs.python.org/3.8/library/asyncio-d
 
 If you access [`http://localhost:8000/docs`](http://localhost:8000/docs) you should see this page:
 
-![](../.gitbook/assets/image%20%2811%29.png)
+![](../.gitbook/assets/image%20%2812%29.png)
 
 Now that the application is created, let's implement some routes.
 
@@ -152,7 +152,7 @@ Each router can have its own lifecycle hooks, I.E, `startup` and `shutdown` hook
 {% code title="src/demo\_fastapi/routes.py" %}
 ```python
 """HTTP routes for the demo REST API."""
-from fastapi import APIRouter
+from fastapi import APIRouter, Response
 from loguru import logger
 
 
@@ -160,44 +160,66 @@ router = APIRouter()
 
 
 @router.on_event("startup")
-async def on_startup():
+async def on_startup() -> None:
     """"This function is called once after application initialization.
-    
+
     If any error is raised in this function, the application will never start.
     """
-    logger.debug("Starting router!")
+    logger.info("Starting router!")
 
 
 @router.on_event("shutdown")
-async def on_shutdown():
+async def on_shutdown() -> None:
     """This function is called once before application is stopped.
-    
+
     If any error is raised in this function, application will exit immediately.
     """
-    logger.debug("Stopping router!")
+    logger.info("Stopping router!")
+
 
 ```
 {% endcode %}
 
 In practice, **events hooks** provide a simple way to **connect clients before the application starts** and **close connections on shutdown** in order to gracefully stop the application. You will find such an example in the page [Using PostgreSQL Database](using-postgresql-database.md).
 
+If you stop and restart your application, you should now see the lines printed on the console on startup and shutdown:
+
+![Application logs in standard output](../.gitbook/assets/image%20%286%29.png)
+
 ### Write a basic route
 
-Let's write a route that will accept `GET` requests on the root \(`/`\) endpoint and return an empty JSON body with status `HTTP 202 Accepted` ...
+Let's write a route that will accept `GET` requests on the root \(`/`\) endpoint and return an empty body with status `HTTP 202 Accepted` ...
 
 {% code title="src/demo\_fastapi/routes.py" %}
 ```python
+"""HTTP routes for the demo REST API."""
 from fastapi import APIRouter, Response
 from loguru import logger
 
-...
+
+router = APIRouter()
+
+
+@router.on_event("startup")
+async def on_startup() -> None:
+    """"This function is called once after application initialization.
+
+    If any error is raised in this function, the application will never start.
+    """
+    logger.info("Starting router!")
+
+
+@router.on_event("shutdown")
+async def on_shutdown() -> None:
+    """This function is called once before application is stopped.
+
+    If any error is raised in this function, application will exit immediately.
+    """
+    logger.info("Stopping router!")
 
 
 @router.get(
-    "/",
-    summary="Get an empty response.",
-    status_code=202,
-    tags=["Demonstration"],
+    "/", summary="Get an empty response.", status_code=202, tags=["Demonstration"],
 )
 def demo_response() -> Response:
     """Return an empty response when successful. This route does not accept any parameter."""
@@ -252,17 +274,17 @@ Refresh the documentation served on [`http://127.0.0.1:8000/docs`](http://127.0.
 
 You should see this page:
 
-![](../.gitbook/assets/image%20%288%29.png)
+![](../.gitbook/assets/image%20%289%29.png)
 
 Click on "Try it out" and make a request to your API using the form. It should send you back an empty response with status code 202 as mentioned in the documentation:
 
-![](../.gitbook/assets/image%20%2810%29.png)
+![](../.gitbook/assets/image%20%2811%29.png)
 
 ### Make your first commit
 
 It's time to make your first commit. When you perform a commit, several tests must pass in order for the commit to be accepted:
 
-![Console after successfull commit](../.gitbook/assets/image%20%2812%29.png)
+![Console after successfull commit](../.gitbook/assets/image%20%2813%29.png)
 
 {% hint style="info" %}
 Those tests are called [`git hooks`](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) and are managed using [`pre-commit`](https://pre-commit.com/). The configuration of pre-commit can be found in the`.pre-commit-config.yml file.`
