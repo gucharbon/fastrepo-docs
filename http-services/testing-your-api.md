@@ -169,5 +169,29 @@ async def test_root(client: AsyncClient) -> None:
 In this test, we use the `client` fixture to perform a `GET` request on the application.
 {% endhint %}
 
+## Running the tests
+
+The `test` invoke task can be used to run the tests:
+
+```python
+inv test
+```
+
+{% hint style="info" %}
+`pytest` is configured in the `setup.cfg` file. The default configuration when using `fastrepo` project generator is the following:
+
+```python
+[tool:pytest]
+addopts = -vvv
+    --cov-report=xml:cov.xml
+    --cov-report=html:docs/coverage-report
+    --cov-report=term-missing
+    --cov-branch
+    --cov=src/demo_fastapi
+    --doctest-modules
+    tests
+```
+{% endhint %}
+
 
 
