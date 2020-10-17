@@ -94,7 +94,7 @@ Check the [official documentation](https://docs.python.org/3.8/library/asyncio-d
 
 If you access [`http://localhost:8000/docs`](http://localhost:8000/docs) you should see this page:
 
-![](../.gitbook/assets/image%20%2812%29.png)
+![](../.gitbook/assets/image%20%2813%29.png)
 
 Now that the application is created, let's implement some routes.
 
@@ -284,7 +284,7 @@ Click on "Try it out" and make a request to your API using the form. It should s
 
 It's time to make your first commit. When you perform a commit, several tests must pass in order for the commit to be accepted:
 
-![Console after successfull commit](../.gitbook/assets/image%20%2813%29.png)
+![Console after successfull commit](../.gitbook/assets/image%20%2814%29.png)
 
 {% hint style="info" %}
 Those tests are called [`git hooks`](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) and are managed using [`pre-commit`](https://pre-commit.com/). The configuration of pre-commit can be found in the`.pre-commit-config.yml file.`

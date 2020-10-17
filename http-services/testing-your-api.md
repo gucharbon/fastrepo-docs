@@ -55,9 +55,6 @@ def caplog(
     - caplog.records         -> list of logging.LogRecord instances
     - caplog.record_tuples   -> list of (logger_name, level, message) tuples
     - caplog.clear()         -> clear captured records and formatted log output string
-
-    The code is taken from loguru documentation. Type annotations were added to play nice with mypy.
-    See https://loguru.readthedocs.io/en/stable/resources/migration.html#making-things-work-with-pytest-and-caplog
     """
 
     class PropogateHandler(logging.Handler):
@@ -81,12 +78,10 @@ async def client(application: FastAPI) -> AsyncGenerator[AsyncClient, None]:
     """Yield an asynchronous client to test the demo_fastapi application.
 
     Examples:
-
     - Make a GET request
-        >>> get_response = await client.get('/something')
+    >>> get_response = await client.get('/something')   # doctest: +SKIP
     - Make a POST request
-        >>> post_response = await client.post('/something', data={'key': 'value'})
-    ```
+    >>> post_response = await client.post('/something', data={'key': 'value'})  # doctest: +SKIP
     """
     # Need to start the event manually here
     for hook in application.router.on_startup:
@@ -102,6 +97,12 @@ async def client(application: FastAPI) -> AsyncGenerator[AsyncClient, None]:
 
 {% hint style="info" %}
 As stated in comment, the `caplog` fixture is taken from [loguru documentation](https://loguru.readthedocs.io/en/stable/resources/migration.html#making-things-work-with-pytest-and-caplog).
+{% endhint %}
+
+{% hint style="success" %}
+`# doctest: +SKIP` is used to prevent pytest from running code examples in docstring.
+
+Check [doctest example in the official documentation](https://docs.python.org/3/library/doctest.html).
 {% endhint %}
 
 {% hint style="warning" %}
@@ -139,7 +140,7 @@ def test_startup_event(application: FastAPI, caplog: LogCaptureFixture) -> None:
 ```
 {% endcode %}
 
-{% hint style="info" %}
+{% hint style="success" %}
 The `test_startup_event` declares an argument named `application`. Because **we defined a fixture** named application in `tests/conftest.py`, the **returned value of the fixture** will **automatically be injected** as the **argument value** of the function when running the test.
 {% endhint %}
 
@@ -165,7 +166,7 @@ async def test_root(client: AsyncClient) -> None:
 ```
 {% endcode %}
 
-{% hint style="info" %}
+{% hint style="success" %}
 In this test, we use the `client` fixture to perform a `GET` request on the application.
 {% endhint %}
 
@@ -195,5 +196,9 @@ addopts = -vvv
 {% endcode %}
 {% endhint %}
 
+You should see the test coverage report displayed on the console:
 
+![pytest output in the console](../.gitbook/assets/image%20%2812%29.png)
+
+And here we go, 🎉🎉 100% test coverage 🎉🎉
 
