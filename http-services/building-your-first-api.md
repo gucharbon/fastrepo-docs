@@ -183,35 +183,11 @@ In practice, **events hooks** provide a simple way to **connect clients before t
 
 ### Write a basic route
 
-Let's write a route that will accept `GET` requests on the root \(`/`\) endpoint and return an empty JSON body with status `HTTP 202 Accepted` 
+Let's write a route that will accept `GET` requests on the root \(`/`\) endpoint and return an empty JSON body with status `HTTP 202 Accepted` ...
 
 {% code title="src/demo\_fastapi/routes.py" %}
 ```python
-"""HTTP routes for the demo REST API."""
-from fastapi import APIRouter, Response
-from loguru import logger
-
-
-router = APIRouter()
-
-
-@router.on_event("startup")
-async def on_startup() -> None:
-    """"This function is called once after application initialization.
-    
-    If any error is raised in this function, the application will never start.
-    """
-    logger.debug("Starting router!")
-
-
-@router.on_event("shutdown")
-async def on_shutdown() -> None:
-    """This function is called once before application is stopped.
-    
-    If any error is raised in this function, application will exit immediately.
-    """
-    logger.debug("Stopping router!")
-
+...
 
 @router.get(
     "/",
