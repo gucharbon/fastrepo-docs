@@ -8,6 +8,8 @@ description: Create an HTTP service in minutes
 
 {% hint style="warning" %}
 This tutorial assumes that you are already familiar with the HTTP protocol. A good resource to learn about HTTP is the [Overview of HTTP by the Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview).
+
+You can also find a [summary of existing HTTP requests methods on MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods).
 {% endhint %}
 
 In this section you will learn how to:
