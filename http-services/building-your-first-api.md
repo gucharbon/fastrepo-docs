@@ -91,7 +91,7 @@ when the environment variable `"PYTHONASYNCIODEBUG"` is set to `1`. You should a
 Check the [official documentation](https://docs.python.org/3.8/library/asyncio-dev.html) to learn more about asyncio debug mode.
 {% endhint %}
 
-If you access `http://localhost:8000/docs` you should see this page:
+If you access [`http://localhost:8000/docs`](http://localhost:8000/docs) you should see this page:
 
 ![Default Swagger OpenAPI Documentation](../.gitbook/assets/image%20%286%29.png)
 
