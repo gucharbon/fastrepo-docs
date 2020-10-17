@@ -227,7 +227,7 @@ def demo_response() -> Response:
 {% endcode %}
 
 {% hint style="info" %}
-As you can see, we annotate function return type. You must always provide type annotation for arguments accepted by your function as well as its return value.
+As you can see, we annotate function return type. You must always provide type annotation for arguments accepted by your function as well as its return value. Read the [mypy cheatsheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html) if you want to know how to annotate your functions.
 {% endhint %}
 
 A route that accept `GET` requests is defined using the decorator `@router.get()`. If you need to create a route that accept `POST` requests, you would define it using the `@router.post()` decorator.
