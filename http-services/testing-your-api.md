@@ -180,6 +180,7 @@ inv test
 {% hint style="info" %}
 `pytest` is configured in the `setup.cfg` file. The default configuration when using `fastrepo` project generator is the following:
 
+{% code title="setup.cfg" %}
 ```python
 [tool:pytest]
 addopts = -vvv
@@ -191,6 +192,7 @@ addopts = -vvv
     --doctest-modules
     tests
 ```
+{% endcode %}
 {% endhint %}
 
 
