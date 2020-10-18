@@ -276,6 +276,6 @@ Start your application:
 Much better isn't it? 🚀 
 
 {% hint style="danger" %}
-It is not possible to format the two first uvicorn logs using this pattern because uvicorn is started before our code is imported.
+It is not possible to format the two first uvicorn logs using this pattern because uvicorn is started before our code is imported. This problem will be solved when we add a command line interface to our application.
 {% endhint %}
 
