@@ -151,7 +151,6 @@ The `test_startup_event` declares an argument named `application`. Because **we 
 """Test router of demo_fastapi application."""
 import pytest
 from httpx import AsyncClient
-from _pytest.logging import LogCaptureFixture
 
 
 @pytest.mark.asyncio
