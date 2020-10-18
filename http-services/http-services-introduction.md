@@ -12,6 +12,10 @@ This guide covers the following topics:
 
 {% page-ref page="building-your-first-api.md" %}
 
+{% page-ref page="testing-your-api.md" %}
+
+{% page-ref page="logging-standardization.md" %}
+
 {% hint style="info" %}
 Work in progres... Check the [roadmap](../roadmap.md).
 {% endhint %}
