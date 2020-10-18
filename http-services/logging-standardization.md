@@ -43,13 +43,14 @@ Functions:
   a valid LoggingSettings instance.
 
 """
+from __future__ import annotations
 import logging
 import sys
 from pathlib import Path
 from typing import Optional
 
+import loguru
 from loguru import logger
-from loguru import Logger
 
 from .handler import InterceptHandler
 from .settings import LoggingSettings
@@ -61,7 +62,7 @@ def setup_logger(
     filepath: Optional[Path] = None,
     rotation: Optional[str] = None,
     retention: Optional[str] = None,
-) -> Logger:
+) -> loguru.Logger:
     """Define the global logger to be used by your entire application.
 
     Arguments:
@@ -117,7 +118,7 @@ def setup_logger(
     return logger
 
 
-def setup_logger_from_settings(settings: LoggingSettings) -> Logger:
+def setup_logger_from_settings(settings: LoggingSettings) -> loguru.Logger:
     """Define the global logger to be used by your entire application.
 
     Arguments:
