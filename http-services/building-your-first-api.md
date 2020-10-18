@@ -96,7 +96,9 @@ If you access [`http://localhost:8000/docs`](http://localhost:8000/docs) you sho
 
 ![](../.gitbook/assets/image%20%2815%29.png)
 
-Because it can be tedious to start the application using `uvicorn` let's write an `invoke` task for that:
+### Create a task to start the application
+
+Because it can be tedious to start the application using `uvicorn` and specify `PYTHONASYNCIODEBUG` environment variable each time, let's write an `invoke` task for that:
 
 ```python
 # type: ignore
