@@ -128,7 +128,10 @@ from invoke import task
 def start(
     c, host="localhost", port=8000, reload=True, asyncio_debug=True, dry_run=False,
 ):
-    """Start the application in foreground. The API listens on host localhost and port 8000 with hot-reload enabled by default."""
+    """Start the application in foreground.
+    
+    The API listens on host localhost and port 8000 with hot-reload enabled by default.
+    """
     if asyncio_debug:
         os.environ["PYTHONASYNCIODEBUG"] = "1"
     cmd = f"uvicorn demo_fastapi.app:app {'--reload' if reload else ''} --host {host} --port {port}"
