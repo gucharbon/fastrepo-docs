@@ -96,6 +96,54 @@ If you access [`http://localhost:8000/docs`](http://localhost:8000/docs) you sho
 
 ![](../.gitbook/assets/image%20%2815%29.png)
 
+Because it can be tedious to start the application using `uvicorn` let's write an `invoke` task for that:
+
+```python
+# type: ignore
+""" Tasks for demo_fastapi project. """
+# import os is the new line here.
+import os
+from pathlib import Path
+from shutil import rmtree
+
+from invoke import task
+
+
+# We don't include the rest of the file as it would be too big
+# ...
+
+# Simply add this task to your file:
+@task(
+    help={
+        "host": "The bind host. Default to 'localhost'.",
+        "port": "The bind port. Default to '8000'.",
+        "reload": (
+            "Enable hot-reloading for development. "
+            "This is enabled by default. Use '--no-reload' to disable this feature."
+        ),
+        "asyncio-debug": "Enable asyncio debug mode. See https://docs.python.org/3/library/asyncio-dev.html#debug-mode.",
+        "dry-run": "Use '--dry-run' to print command that would have been executed to terminal and stop the program.",
+    }
+)
+def start(
+    c, host="localhost", port=8000, reload=True, asyncio_debug=True, dry_run=False,
+):
+    """Start the application in foreground. The API listens on host localhost and port 8000 with hot-reload enabled by default."""
+    if asyncio_debug:
+        os.environ["PYTHONASYNCIODEBUG"] = "1"
+    cmd = f"uvicorn demo_fastapi.app:app {'--reload' if reload else ''} --host {host} --port {port}"
+    if dry_run:
+        print(cmd)
+        return
+    c.run(cmd)
+```
+
+You should now be able to start the application using the command line:
+
+```text
+inv start
+```
+
 Now that the application is created, let's implement some routes.
 
 ### Create a router for your application
@@ -112,8 +160,6 @@ router = APIRouter()
 
 ```
 {% endcode %}
-
-
 
 {% tabs %}
 {% tab title="Notes" %}
@@ -291,6 +337,4 @@ Those tests are called [`git hooks`](https://git-scm.com/book/en/v2/Customizing-
 {% endhint %}
 
 Before writing more complex routes, let's write tests for our minimal application.
-
-
 
