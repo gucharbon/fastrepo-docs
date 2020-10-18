@@ -78,7 +78,7 @@ By default, `uvicorn` starts your application using port `8000` and listens to `
 
 You should see logs in your console indicating that your application is starting:
 
-![Uvicorn running and serving FastAPI application](../.gitbook/assets/image%20%2810%29.png)
+![Uvicorn running and serving FastAPI application](../.gitbook/assets/image%20%2811%29.png)
 
 {% hint style="success" %}
 Python displays debugging information related to asyncio such as this line:
@@ -94,7 +94,7 @@ Check the [official documentation](https://docs.python.org/3.8/library/asyncio-d
 
 If you access [`http://localhost:8000/docs`](http://localhost:8000/docs) you should see this page:
 
-![](../.gitbook/assets/image%20%2813%29.png)
+![](../.gitbook/assets/image%20%2815%29.png)
 
 Now that the application is created, let's implement some routes.
 
@@ -274,17 +274,17 @@ Refresh the documentation served on [`http://127.0.0.1:8000/docs`](http://127.0.
 
 You should see this page:
 
-![](../.gitbook/assets/image%20%289%29.png)
+![](../.gitbook/assets/image%20%2810%29.png)
 
 Click on "Try it out" and make a request to your API using the form. It should send you back an empty response with status code 202 as mentioned in the documentation:
 
-![](../.gitbook/assets/image%20%2811%29.png)
+![](../.gitbook/assets/image%20%2812%29.png)
 
 ### Make your first commit
 
 It's time to make your first commit. When you perform a commit, several tests must pass in order for the commit to be accepted:
 
-![Console after successfull commit](../.gitbook/assets/image%20%2814%29.png)
+![Console after successfull commit](../.gitbook/assets/image%20%2816%29.png)
 
 {% hint style="info" %}
 Those tests are called [`git hooks`](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) and are managed using [`pre-commit`](https://pre-commit.com/). The configuration of pre-commit can be found in the`.pre-commit-config.yml file.`
