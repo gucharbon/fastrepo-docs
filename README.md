@@ -33,19 +33,13 @@ python -m fastrepo
 
 {% tab title="Rest API" %}
 ```
-python -m fastrepo --template fastnfurious
+python -m fastrepo --template rest
 ```
 {% endtab %}
 
 {% tab title="NATS Service" %}
 ```
-python -m fastrepo --template nats-service
-```
-{% endtab %}
-
-{% tab title="NATS Subscription" %}
-```
-python -m fastrepo --template nats-subscription
+python -m fastrepo --template nats
 ```
 {% endtab %}
 
@@ -108,17 +102,11 @@ def run():
 
 {% tab title="Rest API" %}
 {% hint style="info" %}
-Work in progress... Check the [roadmap](roadmap.md).
+Check the tutorial [Building your f](http-services/building-your-first-api.md)irst API
 {% endhint %}
 {% endtab %}
 
 {% tab title="NATS Service" %}
-{% hint style="info" %}
-Work in progress... Check the [roadmap](roadmap.md).
-{% endhint %}
-{% endtab %}
-
-{% tab title="NATS Subscription" %}
 {% hint style="info" %}
 Work in progress... Check the [roadmap](roadmap.md).
 {% endhint %}
@@ -154,27 +142,11 @@ By default, you will find three files:
 
 {% tab title="Rest API" %}
 {% hint style="info" %}
-Work in progress... Check the [roadmap](roadmap.md). But you might want to take a loot at:
-
-* [pytest fixtures](https://docs.pytest.org/en/stable/fixture.html#scope-sharing-fixtures-across-classes-modules-packages-or-session)
-* [pytest parametrize](https://docs.pytest.org/en/stable/parametrize.html#pytest-mark-parametrize-parametrizing-test-functions)
-* [monkeypatching with pytest](https://docs.pytest.org/en/3.1.1/monkeypatch.html#monkeypatching-mocking-modules-and-environments)
-* [Testing FastAPI](https://fastapi.tiangolo.com/tutorial/testing/)
-* [Tavern](https://tavern.readthedocs.io/en/latest/)
+Check the tutorial [Testing your API](http-services/testing-your-api.md)
 {% endhint %}
 {% endtab %}
 
 {% tab title="NATS Service" %}
-{% hint style="info" %}
-Work in progress... Check the [roadmap](roadmap.md). But you might want to take a loot at:
-
-* [pytest fixtures](https://docs.pytest.org/en/stable/fixture.html#scope-sharing-fixtures-across-classes-modules-packages-or-session)
-* [pytest parametrize](https://docs.pytest.org/en/stable/parametrize.html#pytest-mark-parametrize-parametrizing-test-functions)
-* [monkeypatching with pytest](https://docs.pytest.org/en/3.1.1/monkeypatch.html#monkeypatching-mocking-modules-and-environments)
-{% endhint %}
-{% endtab %}
-
-{% tab title="NATS Subscription" %}
 {% hint style="info" %}
 Work in progress... Check the [roadmap](roadmap.md). But you might want to take a loot at:
 
@@ -256,7 +228,7 @@ npm i -D <package_name>
 Use invoke which is installed as a development dependency to run your tests:
 
 ```bash
-inv test
+pydev test
 ```
 
 > [`pytest` ](https://docs.pytest.org/en/stable/)is used to discover and run tests. [`pytest-cov`](https://pypi.org/project/pytest-cov/) is used to compute test coverage.
@@ -278,7 +250,7 @@ npm run test
 Use the `format` invoke task to format your code:
 
 ```bash
-inv format
+pydev format
 ```
 
 > [`black` ](https://github.com/psf/black)is used to format the code.
@@ -302,7 +274,7 @@ npm run format
 Use the `lint` invoke task to lint your code:
 
 ```bash
-inv lint
+pydev lint
 ```
 
 > [`flake8` ](https://flake8.pycqa.org/en/latest/)is used to lint the code.
@@ -323,10 +295,10 @@ npm run lint
 
 {% tabs %}
 {% tab title="Python" %}
-Use the `check` invoke task to perform type checking:
+Use the `typecheck` invoke task to perform type checking:
 
 ```bash
-inv check
+pydev typecheck
 ```
 
 > [`mypy` ](http://www.mypy-lang.org/)is used to perform type checking.
@@ -346,7 +318,7 @@ Typescrypt always performs type checking at build time.
 Use the `build` invoke task to build the project:
 
 ```bash
-inv build
+pydev build
 ```
 
 {% hint style="info" %}
@@ -356,13 +328,19 @@ Note that this run the tests, capture coverage, and build the documentation **be
 Use the `--no-coverage` option to disable tests:
 
 ```bash
-inv build --no-coverage
+pydev build --no-coverage
 ```
 
 Use the `--no-docs` option to disable the documentation build:
 
 ```bash
-inv build --no-docs
+pydev build --no-docs
+```
+
+Use the --no-package option to disable the package build:
+
+```bash
+pydev build --no-package
 ```
 {% endtab %}
 
@@ -384,7 +362,7 @@ Use the`publish` invoke task to publish the project to a package repository.
 By default packages are published to pypi, but you can specify a specific repository to upload the package to using the `--repository`option:
 
 ```bash
-inv publish [--repository AZ_ARTIFACT_PACKAGE_FLOW_URL]
+pydev publish [--repository AZ_ARTIFACT_PACKAGE_FLOW_URL]
 ```
 {% endtab %}
 
@@ -402,7 +380,7 @@ Work in progres... Check the [roadmap](roadmap.md).
 Use the `docs` invoke task to serve the documentation on your localhost:
 
 ```bash
-inv docs
+pydev docs
 ```
 
 {% hint style="info" %}
