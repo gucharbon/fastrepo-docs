@@ -4,6 +4,10 @@ description: Generate new python projects from the command line.
 
 # Fastrepo
 
+{% hint style="warning" %}
+This documentation is still a work in progress, content might be updated at any moment.
+{% endhint %}
+
 This page is a F.A.Q. If you want to learn more about `fastrepo` and `python development`, check the links below:
 
 {% page-ref page="introduction.md" %}
