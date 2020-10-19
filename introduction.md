@@ -18,28 +18,29 @@ This documentation describes not only the usage of the `fasterpo` command line t
 ## Features
 
 * Automate package management configuration
-  * Manage dependencies
-  * Build package
-  * Publish package
+  * **Manage dependencies**
+  * **Build** package
+  * **Publish** package
 * Automate development tools configuration
-  * Linter
-  * Formater
-  * Test Runner
-  * Test Coverage
-  * Type Checking
-* Automated version release
-  * Bump Versions
-  * Generate Changelogs
-* Git Hook integration
-  * Always lint and format before commit
-  * Always lint commit message
-  * Prevent large files from being added to repository
-* Docker integration
-  * Build Docker Image
-  * Deploy Docker Services
-* VSCode Integration
-  * Lint/Format on Save
-  * Run tests
+  * **Lint** code
+  * **Format** code
+  * **Discover tests**
+  * **Run tests**
+  * Measure code **coverage**
+  * Perform **type checking**
+* Automate version release
+  * **Bump** versions
+  * Generate **changelogs**
+* Automate Git hooks integration
+  * Always **lint and format before commit**
+  * Always **lint commit message**
+  * **Prevent large files** from being added to repository
+* Automate Docker integration
+  * Build **docker image**
+  * Deploy **docker services**
+* Automate VSCode Integration
+  * **Lint/Format on Save**
+  * **Run tests**
   * Debug
 
 
